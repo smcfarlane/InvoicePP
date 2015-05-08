@@ -1,14 +1,15 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-  <title>Invoice</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <%= stylesheet_link_tag "application" %>
+  <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
-
+    <%= render 'layouts/static_nav' %>
+    <div style="margin-top: 70px; width: 100%"></div>
+    <%= yield %>
 </body>
 </html>
