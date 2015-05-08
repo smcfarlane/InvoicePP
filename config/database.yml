@@ -3,7 +3,7 @@
 # Install the pg driver:
 #   gem install pg
 # On OS X with Homebrew:
-#   gem install pg -- --with-pg-config=/usr/local/bin/pg_config
+#   gem install pg -- --with-pg-config=/Applications/Postgres.app/Contents/Versions/9.4/bin/pg_config
 # On OS X with MacPorts:
 #   gem install pg -- --with-pg-config=/opt/local/lib/postgresql84/bin/pg_config
 # On Windows:
@@ -19,6 +19,8 @@ default: &default
   encoding: unicode
   # For details on connection pooling, see rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
+  database: [YOUR_DATABASE_NAME]
+  host: localhost
   pool: 5
 
 development:
