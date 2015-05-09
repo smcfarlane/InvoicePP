@@ -6,10 +6,6 @@ gem 'rails', '4.2.1'
 # Use postgresql as the database for Active Record
 gem 'pg'
 
-# HTML
-# Slim Templates for Views
-gem "slim-rails"
-
 # CSS
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
