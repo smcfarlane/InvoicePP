@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
   def index
+    redirect_to :dashboard
   end
 
   def about
