@@ -1,4 +1,5 @@
 class Client < ActiveRecord::Base
   has_many :projects
-  belongs_to :manager
+  belongs_to :managers
+  belongs_to :detail
 end

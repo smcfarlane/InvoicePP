@@ -13,6 +13,7 @@ gem 'bootstrap-sass', '~> 3.2.0'
 gem 'autoprefixer-rails'
 
 # Javascript
+gem 'sprockets-es6'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 gem 'therubyracer', platforms: :ruby
 # Use jquery as the JavaScript library

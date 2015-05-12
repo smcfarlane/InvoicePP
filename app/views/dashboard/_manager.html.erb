@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
+    <div class="container">
+      <div class="row">
+        <h3>Manager Items</h3>
+        <% u.clients.all.each do |c| %>
+          <div class="col-md-4">
+            <h4><%=	 c.detail.name %></h4>
+            <ul>
+              <%	 c.projects.all.each do |p| %>
+                <li><%=	p.name %> - <%= p.identifier %></li>
+              <%	 end %>
+            </ul>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -8,10 +8,5 @@ class CreateProjects < ActiveRecord::Migration
 
       t.timestamps null: false
     end
-
-    create_table :project_vendor, :id => false do |t|
-      t.references :project, :null => false
-      t.references :vendor, :null => false
-    end
   end
 end

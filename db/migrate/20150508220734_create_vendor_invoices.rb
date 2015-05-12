@@ -1,7 +1,7 @@
 class CreateVendorInvoices < ActiveRecord::Migration
   def change
     create_table :vendor_invoices do |t|
-      t.references :vender
+      t.references :vendor
       t.references :project
       t.integer :total
       t.boolean :flat_fee

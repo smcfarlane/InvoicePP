@@ -1,0 +1,5 @@
+<% @u.each do |u| %>
+  <%= render partial: 'manager', locals: {u: u} if u.is_a? Manager %>
+  <%= render partial: 'vendor', locals: {u: u} if u.is_a? Vendor %>
+  <%= render partial: 'client', locals: {u: u} if u.is_a? Client %>
+<% end %>
