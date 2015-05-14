@@ -1,18 +1,17 @@
 <div class="row">
   <div class="col-sm-3 col-md-2 sidebar">
     <ul class="nav nav-sidebar">
-      <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+      <li class="<%= "active" if current_page?(controller: "dashboard", action: "index") %>"><%= link_to 'Dashboard', dashboard_path %></li>
       <li><a href="#">Reports</a></li>
-      <li><a href="#">Analytics</a></li>
-      <li><a href="#">Export</a></li>
     </ul>
+    <% if current_user.has_role?("Manager") %>
+    <h4>Clients</h4>
     <ul class="nav nav-sidebar">
-      <li><a href="">Nav item</a></li>
-      <li><a href="">Nav item again</a></li>
-      <li><a href="">One more nav</a></li>
-      <li><a href="">Another nav item</a></li>
-      <li><a href="">More navigation</a></li>
+      <li class="<%= "active" if current_page?(controller: "clients", action: "index") %>"><%= link_to "All Cients", clients_path %></li>
+      <li class="<%= "active" if current_page?(controller: "clients", action: "new") %>"><%= link_to "New Clients", new_client_path %></li>
     </ul>
+    <% end %>
+    <h4>Invoices</h4>
     <ul class="nav nav-sidebar">
       <li><a href="">Nav item again</a></li>
       <li><a href="">One more nav</a></li>

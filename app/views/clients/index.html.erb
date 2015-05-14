@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row">
+    <% @clients.each do |c| %>
+      <div class="col-md-4">
+        <div class="panel panel-default">
+          <div class="panel-heading"><h3><%=	c.detail.name %></h3></div>
+          <div class="panel-body">
+            <ul class="list-group">
+              <li class="list-group-item"><span class="badge"><%= c.client_invoices.count %></span> Invoice Count</li>
+              <li class="list-group-item">Invoices Amount: <%= c.client_invoices.where(paid: false).pluck(:total).inject(0, :+) %></li>
+              <li class="list-group-item">Contact: <%= c.detail.contact %></li>
+              <li class="list-group-item">Phone: <%= c.detail.phone_number %></li>
+              <li class="list-group-item">Location: <%=	c.detail.city %>, <%=	c.detail.state %> </li>
+            </ul>
+          </div>
+          <div class="panel-footer">
+            <div class="btn-group">
+              <%= link_to 'View Client Details', {controller: "clients", action: 'show', id: c.id}, class: "btn btn-default" %>
+              <%= link_to 'Edit Client Details', {controller: "clients", action: 'edit', id: c.id}, class: "btn btn-default" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="row">
+    <%= link_to 'Create New Client', new_client_path, class: "btn btn-primary" %>
+  </div>
+</div>

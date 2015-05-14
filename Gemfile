@@ -33,6 +33,7 @@ gem 'bcrypt', '~> 3.1.7'
 
 # User Functionality
 gem 'devise'
+gem 'pundit'
 
 group :production do
   # Use Unicorn as the app server

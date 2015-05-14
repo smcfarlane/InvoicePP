@@ -1,18 +1,14 @@
-<div class="row">
-  <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
-    <div class="container">
-      <div class="row">
-        <h3>Vendor Items</h3>
-        <% u.projects.each do |p| %>
-          <div class="col-md-4">
-            <h4><%= p.name %></h4>
-            <div class="btn-group">
-              <a href="#" class="btn btn-primary">Add Invoice</a>
-              <a href="#" class="btn btn-primary">View Invoices</a>
-            </div>
-          </div>
-        <% end %>
+ <div class="container">
+  <div class="row">
+    <h3>Vendor Items</h3>
+    <% u.projects.each do |p| %>
+      <div class="col-md-4">
+        <h4><%= p.name %></h4>
+        <div class="btn-group">
+          <a href="#" class="btn btn-primary">Add Invoice</a>
+          <a href="#" class="btn btn-primary">View Invoices</a>
+        </div>
       </div>
-    </div>
+    <% end %>
   </div>
 </div>

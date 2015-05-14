@@ -1,0 +1,38 @@
+<div class="row">
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading"><h3>Details</h3></div>
+      <div class="panel-body">
+        <ul class="list-group">
+          <li class="list-group-item">Name: <span class="pull-right"><%= @client.detail.name %></span></li>
+          <li class="list-group-item">Contact:<span class="pull-right"><%= @client.detail.contact %></span></li>
+          <li class="list-group-item">Title: <span class="pull-right"><%= @client.detail.title %> </span></li>
+          <li class="list-group-item">Email:<span class="pull-right"><%= @client.detail.email %></span></li>
+          <li class="list-group-item">Phone:<span class="pull-right"><%= @client.detail.phone_number %></span></li>
+          <li class="list-group-item">Address: <p class="text-right"><%= @client.detail.street_address %> <br/> <%= @client.detail.city %>, <%= @client.detail.state %> <%= @client.detail.zip %> </p></li>
+        </ul>
+      </div>
+      <div class="panel-footer">
+        <%= link_to "Edit Details", {controller: "clients", action: "edit", id: @client.id}, class: "btn btn-default" %>
+        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#client-delete-modal">
+          Delete Client
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading"><h3>Invoices</h3></div>
+      <div class="panel-body">
+        <ul class="list-group">
+          <li class="list-group-item">Current Invoices: <span class="badge"><%= @client.client_invoices.count %></span></li>
+          <li class="list-group-item">Current Invoices Total: <span class="pull-right"><%= @client.client_invoices.where(paid: false).pluck(:total).inject(0, :+) %></span></li>
+        </ul>
+      </div>
+      <div class="panel-footer">
+        <a href="#" class="btn btn-default">View Invoices</a>
+      </div>
+    </div>
+  </div>
+</div>
+<%=render "delete_modal" %>
