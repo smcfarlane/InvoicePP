@@ -35,6 +35,9 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'devise'
 gem 'pundit'
 
+# Markdown
+gem 'redcarpet'
+
 group :production do
   # Use Unicorn as the app server
   gem 'unicorn'

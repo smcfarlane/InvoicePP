@@ -15,8 +15,9 @@
           </div>
           <div class="panel-footer">
             <div class="btn-group">
-              <%= link_to 'View Client Details', {controller: "clients", action: 'show', id: c.id}, class: "btn btn-default" %>
-              <%= link_to 'Edit Client Details', {controller: "clients", action: 'edit', id: c.id}, class: "btn btn-default" %>
+              <%= link_to 'View Details', {controller: "clients", action: 'show', id: c.id}, class: "btn btn-default" %>
+              <%= link_to 'Edit Details', {controller: "clients", action: 'edit', id: c.id}, class: "btn btn-default" %>
+              <%= link_to 'View Projects', client_projects_path(c), class: "btn btn-default" -%>
             </div>
           </div>
         </div>

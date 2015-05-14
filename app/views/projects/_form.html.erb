@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <fieldset class="col-md-8">
+      <legend>New Project Information</legend>
+      <div class="form-group">
+        <label for="name">Project Name</label>
+        <input type="text" id="name" name="name" class="form-control" value="<%= @project.name if @project -%>" required/>
+      </div>
+      <div class="form-group">
+        <label for="identifier">Project Identifier</label>
+        <input type="text" id="identifier" name="identifier" class="form-control" value="<%= @project.identifier if @project -%>" required/>
+        <small>ex. Project number, "year"-"client number"-"project"</small>
+      </div>
+    </fieldset>
+    <fieldset class="col-md-8">
+      <legend>New Project Details</legend>
+      <div class="form-group">
+        <label class="sr-only" for="details">Details</label>
+        <small>You can use plain text, html, or markdown to record project details.</small>
+        <textarea class="form-control" name="details" id="details" rows="10"><%= @project.details if @project -%></textarea>
+      </div>
+    </fieldset>
+  </div>
+  <div class="row">
+    <button type="submit" class="btn btn-primary">Create New Project</button>
+  </div>
+</div>

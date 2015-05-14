@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="row">
+    <%- @user_roles.each do |role| -%>
+      <%- if role.is_a? Manager -%>
+        <h3>Your Projects</h3>
+        <div class="container">
+          <div class="row">
+            <%- role.clients.each do |c| -%>
+              <%- c.projects.where(active: true).each do |p| -%>
+                <div class="col-md-4">
+                  <div class="panel panel-default">
+                    <div class="panel-heading"><h3><%= p.name -%></h3><h4><%= p.identifier -%></h4></div>
+                    <div class="panel-body">
+                      <%= p.details -%>
+                    </div>
+                    <div class="panel-footer">
+                      <%= link_to "Project Details", client_project_path(c, p), class: "btn btn-default" -%>
+                    </div>
+                  </div>
+                </div>
+              <%- end -%>
+            <%- end -%>
+          </div>
+        </div>
+      <%- elsif role.is_a? Vendor -%>
+        <h3>Other Projects</h3>
+        <div class="container">
+          <div class="row">
+            <%- role.projects.where(active: true).each do |p| -%>
+              <div class="col-md-4">
+                <div class="panel panel-default">
+                  <div class="panel-heading"><h3><%= p.name -%></h3><h4><%= p.identifier -%></h4></div>
+                  <div class="panel-body">
+                    <%= p.details -%>
+                  </div>
+                  <div class="panel-footer">
+
+                  </div>
+                </div>
+              </div>
+            <%- end -%>
+          </div>
+        </div>
+      <%- end -%>
+    <%- end -%>
+  </div>
+</div>

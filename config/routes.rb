@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  resources :clients
+  resources :clients do
+    resources :projects
+  end
+  get 'all_projects/' => 'projects#index_all', as: :all_projects
   get 'pages/index'
 
   devise_for :users

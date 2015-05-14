@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="row">
+    <% @projects.each do |p| %>
+      <div class="col-md-4">
+        <div class="panel panel-default">
+          <div class="panel-heading"><h3><%= p.name -%></h3><h4><%= p.identifier -%></h4></div>
+          <div class="panel-body">
+            <%= p.details -%>
+          </div>
+          <div class="panel-footer">
+            <%= link_to "Project Details", client_project_path(@client, p), class: "btn btn-default" -%>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="row">
+    <div class="btn-group">
+      <%= link_to "New Project", new_client_project_path(@client), class: "btn btn-primary" -%>
+    </div>
+  </div>
+</div>
