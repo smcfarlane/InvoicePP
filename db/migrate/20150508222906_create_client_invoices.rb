@@ -3,7 +3,7 @@ class CreateClientInvoices < ActiveRecord::Migration
     create_table :client_invoices do |t|
       t.references :client
       t.references :project
-      t.references :user
+      r.references :user
       t.integer :total
       t.boolean :flat_fee
       t.boolean :paid
