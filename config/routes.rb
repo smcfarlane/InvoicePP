@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
+  resources :vendors
   resources :clients do
     resources :projects
   end
+  post 'add_vendor_to_project/:id' => 'vendors#add_vendor_to_project', as: :vendor_to_project
   get 'all_projects/' => 'projects#index_all', as: :all_projects
   get 'pages/index'
 

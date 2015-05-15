@@ -38,8 +38,7 @@ class ClientsController < ApplicationController
             active: true
     )
     @client.save
-    @return = {location: url_for(controller: "clients", action: "index")}
-    render json: @return
+    redirect_to client_path(@client)
   end
 
   def edit
@@ -55,13 +54,12 @@ class ClientsController < ApplicationController
     @detail.email = params['email']
     @detail.phone_number = params['phone']
     @detail.street_address = params['street']
-    @detail.city = params['street']
+    @detail.city = params['city']
     @detail.state = params['state']
     @detail.zip = params['zip']
     @detail.title = params['title']
-    @detail.save
-    @return = {location: url_for(controller: "clients", action: "index")}
-    render json: @return
+    @detail.save!
+    redirect_to client_path(@client)
   end
 
   def destroy

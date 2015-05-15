@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="row">
+    <%- @vendors.each do |v| -%>
+      <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4><%= v.detail.name -%></h4>
+          </div>
+          <div class="panel-body">
+            <h4>Projects</h4>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Project</th>
+                  <th>Project Id</th>
+                  <th>Client Name</th>
+                </tr>
+              </thead>
+              <tbody>
+                <%- v.projects.each do |p| -%>
+                  <tr>
+                    <td><%= p.name -%></td>
+                    <td><%= p.identifier -%></td>
+                    <td><%= p.client.detail.name -%></td>
+                  </tr>
+                <%- end -%>
+              </tbody>
+            </table>
+            <h4>Information</h4>
+            <ul class="list-group">
+              <li class="list-group-item">Contact: <span class="pull-right"><%= v.detail.contact -%></span></li>
+              <li class="list-group-item">Phone: <span class="pull-right"><%= v.detail.phone_number -%></span></li>
+              <li class="list-group-item">Location: <span class="pull-right"><%= v.detail.city -%>,<%= v.detail.state -%></span></li>
+            </ul>
+          </div>
+          <div class="panel-footer">
+            <div class="btn-group">
+              <%= link_to "View Details", vendor_path(v), class: "btn btn-default" -%>
+              <%= link_to "Edit Vendor", edit_vendor_path(v), class: "btn btn-default" -%>
+            </div>
+          </div>
+        </div>
+      </div>
+    <%- end -%>
+  </div>
+  <div class="row">
+    <div class="btn-group">
+      <%= link_to "New Vendor", new_vendor_path, class: "btn btn-primary" -%>
+    </div>
+  </div>
+</div>

@@ -10,6 +10,10 @@
       <li class="<%= "active" if current_page?(controller: "clients", action: "index") %>"><%= link_to "All Cients", clients_path %></li>
       <li class="<%= "active" if current_page?(controller: "clients", action: "new") %>"><%= link_to "New Clients", new_client_path %></li>
     </ul>
+    <h4>Vendors</h4>
+    <ul class="nav nav-sidebar">
+      <li class="<%= "active" if current_page?(controller: "vendors", action: "index") %>"><%= link_to "All Vendors", vendors_path -%></li>
+    </ul>
     <% end %>
     <h4>Projects</h4>
     <ul class="nav nav-sidebar">

@@ -8,7 +8,10 @@
             <%= p.details -%>
           </div>
           <div class="panel-footer">
-            <%= link_to "Project Details", client_project_path(@client, p), class: "btn btn-default" -%>
+            <div class="btn-group">
+              <%= link_to "Project Details", client_project_path(@client, p), class: "btn btn-default" -%>
+              <%= link_to "Edit Project", client_project_path(@client, p), class: "btn btn-default" -%>
+            </div>
           </div>
         </div>
       </div>

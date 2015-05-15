@@ -14,6 +14,7 @@
         <div class="panel-footer">
           <div class="btn-group">
             <%= link_to "Edit Details", client_project_path(@client, @project), class: "btn btn-default" -%>
+            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#project-delete-modal">Delete Project</button>
           </div>
         </div>
       </div>
@@ -41,3 +42,4 @@
     </div>
   </div>
 </div>
+<%=render "delete_modal" %>

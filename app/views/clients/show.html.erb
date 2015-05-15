@@ -13,10 +13,41 @@
         </ul>
       </div>
       <div class="panel-footer">
-        <%= link_to "Edit Details", {controller: "clients", action: "edit", id: @client.id}, class: "btn btn-default" %>
-        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#client-delete-modal">
-          Delete Client
-        </button>
+        <div class="btn-group">
+          <%= link_to "Edit Details", {controller: "clients", action: "edit", id: @client.id}, class: "btn btn-default" %>
+          <button type="button" class="btn btn-default" data-toggle="modal" data-target="#client-delete-modal">Delete Client</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3>Projects</h3>
+      </div>
+      <div class="panel-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Project Name</th>
+              <ht>Project Id</ht>
+            </tr>
+          </thead>
+          <tbody>
+            <%- @client.projects.each do |p| -%>
+              <tr>
+                <td>p.name</td>
+                <td>p.identifier</td>
+              </tr>
+            <%- end -%>
+          </tbody>
+        </table>
+      </div>
+      <div class="panel-footer">
+        <div class="btn-group">
+          <%= link_to "Projects", client_projects_path(@client), class: "btn btn-default" -%>
+          <%= link_to "New Project", new_client_project_path(@client), class: "btn btn-default" -%>
+        </div>
       </div>
     </div>
   </div>

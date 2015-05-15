@@ -1,0 +1,61 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4>Details</h4>
+        </div>
+        <div class="panel-body">
+          <ul class="list-group">
+            <li class="list-group-item">Name: <span class="pull-right"><%= @vendor.detail.name -%></span></li>
+            <li class="list-group-item">Contact: <span class="pull-right"><%= @vendor.detail.contact -%></span></li>
+            <li class="list-group-item">Title: <span class="pull-right"><%= @vendor.detail.title -%></span></li>
+            <li class="list-group-item">Email: <span class="pull-right"><%= @vendor.detail.email -%></span></li>
+            <li class="list-group-item">Phone: <span class="pull-right"><%= number_to_phone(@vendor.detail.phone_number) -%></span></li>
+            <li class="list-group-item">Address: <p class="text-right"><%= @vendor.detail.street_address -%> <br/> <%= @vendor.detail.city -%>, <%= @vendor.detail.state -%> <%= @vendor.detail.zip -%></p></li>
+          </ul>
+        </div>
+        <div class="panel-footer">
+          <div class="btn-group">
+            <%= link_to "Edit Vendor", edit_vendor_path(@vendor), class: "btn btn-default" -%>
+            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#vendor-delete-modal">Delete Vendor</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4>Projects</h4>
+        </div>
+        <div class="panel-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Project Name</th>
+                <th>Project Id</th>
+                <th>Client</th>
+              </tr>
+            </thead>
+            <tbody>
+              <%- @vendor.projects.each do |p| -%>
+                <tr>
+                  <td><%= p.name -%></td>
+                  <td><%= p.identifier -%></td>
+                  <td><%= p.client.detail.name -%></td>
+                </tr>
+              <%- end -%>
+            </tbody>
+          </table>
+        </div>
+        <div class="panel-footer">
+          <div class="btn-group">
+            <button type="button" data-toggle="modal" data-target="#add-project-modal" class="btn btn-default">Add Vendor to Project</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<%=render "delete_modal" %>
+<%= render "project_select_form" -%>
