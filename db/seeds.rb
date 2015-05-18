@@ -130,7 +130,7 @@ vendor_invoice = VendorInvoice.create!(
 line_items = LineItem.create!(
      item: "service 1",
      value: 200000,
-     client_invoices_id: client_invoice.id
+     client_invoice_id: client_invoice.id
 )
 
 vendor_line_item = VendorLineItem.create!(

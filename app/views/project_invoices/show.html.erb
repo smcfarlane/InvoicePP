@@ -1,0 +1,44 @@
+<%= link_to "back", project_project_invoices_path(@invoice.project), class: "btn btn-default" -%>
+<div class="container top-20">
+  <div class="row">
+    <div class="col-md-12 panel panel-default">
+      <div class="row">
+        <div class="col-md-10">
+          <h2><%= @manager.detail.name -%></h2>
+          <p><strong>Address:</strong> <br/><%= @manager.detail.street_address -%> <br/> <%= @manager.detail.city -%>, <%= @manager.detail.state -%> <%= @manager.detail.zip -%>
+            <br/> <strong>Phone:</strong> <%= @manager.detail.phone_number -%> <br/><strong>Email:</strong> <%= @manager.detail.email -%></p>
+        </div>
+        <div class="col-md-2 top-20">
+            <p><strong>Date: <%= Time.now.strftime("%b %-d, %Y") -%> <br/>Invoice: <%= @invoice.identifier -%> <br/> Due Date: <%= @invoice.due_date.strftime("%b %-d, %Y")  -%></strong> </p>
+        </div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-md-12">
+          <table class="table table-striped">
+            <thead>
+             <tr>
+               <th>Item</th>
+               <th>Amount</th>
+             </tr>
+            </thead>
+            <tbody>
+              <%- @invoice.line_items.each do |li| -%>
+                <tr>
+                  <td><%= li.item -%></td>
+                  <td style="width: 10%;"><%= number_to_currency(li.value) -%></td>
+                </tr>
+              <%- end -%>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-md-offset-10 col-md-2">
+          <p><strong>Total: <%= number_to_currency(@invoice.total) -%></strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

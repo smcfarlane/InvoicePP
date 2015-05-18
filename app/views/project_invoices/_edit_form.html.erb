@@ -1,0 +1,35 @@
+<fieldset>
+  <legend>Invoice for which Client and Project</legend>
+  <div class="col-md-6 form-group">
+    <label for="identifier">Invoice Identifier</label>
+    <small>Invoice Name or Number according to your system.</small>
+    <input type="text" id="identifier" name="identifier" class="form-control" value="<%= @invoice.identifier -%>"/>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group">
+      <label for="due_date">Due Date</label>
+      <%= select_date @invoice.due_date, prefix: :due_date %>
+    </div>
+  </div>
+</fieldset>
+<fieldset class="line-items">
+  <legend>Invoice Details <span class="pull-right"><button type="button" class="btn btn-info btn-xs new-line-item">New Line Item</button></span></legend>
+  <input class="num_of_line_items" type="hidden" name="num_of_line_items" value="<%= @invoice.line_items.count -%>"/>
+  <%- @invoice.line_items.each_with_index do |li, i| -%>
+    <div class="row">
+      <input type="hidden" name="item<%= i + 1 -%>-id" value="<%= li.id -%>"/>
+      <div class="col-md-8 form-group">
+        <label for="item<%= i + 1 -%>">Line Item <%= i + 1 -%></label>
+        <input type="text" id="item<%= i + 1 -%>" name="item<%= i + 1 -%>" class="form-control" value="<%= li.item -%>"/>
+      </div>
+      <div class="form-group col-md-4">
+        <Label>Line Item <%= i + 1 -%> Amount</Label>
+        <div class="input-group">
+          <span class="input-group-addon">$</span>
+          <input name="amount<%= i + 1 -%>" type="text" class="form-control" aria-label="Amount" value="<%= li.value -%>">
+        </div>
+      </div>
+    </div>
+  <%- end -%>
+</fieldset>
+<button type="submit" class="btn btn-primary">Update Invoice</button>

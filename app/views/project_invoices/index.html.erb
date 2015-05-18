@@ -1,0 +1,60 @@
+<div class="contianer">
+  <div class="row">
+    <%- @project.client_invoices.where(active: true).each do |i| -%>
+      <div class="col-md-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <div class="row">
+              <div class="col-md-8">
+                <h4>Invoice Id: <%= i.identifier -%></h4>
+              </div>
+              <div class="col-md-4">
+                <%- if i.paid -%>
+                  <button type="button" class="btn btn-success disabled top-5 pull-right">Paid</button>
+                <%- else -%>
+                  <%= link_to "Mark Paid", mark_paid_path(i), class: "btn btn-danger btn-sm top-5 pull-right" -%>
+                <%- end -%>
+              </div>
+            </div>
+          </div>
+          <div class="panel-body">
+            <ul class="list-group">
+              <li class="list-group-item">Due Date: <span class="pull-right"><%= i.due_date.strftime("%b %-d, %Y") -%></span></li>
+              <li class="list-group-item">Flat Fee <span class="pull-right"><%= i.flat_fee ? "Yes" : "No" -%></span></li>
+              <li class="list-group-item">Paid <span class="pull-right"><%= i.paid ? "Yes" : "No"  -%></span></li>
+            </ul>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Item</th>
+                  <th>Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                <%- i.line_items.each do |li| -%>
+                  <tr>
+                    <td><%= li.item -%></td>
+                    <td><%= number_to_currency(li.value) -%></td>
+                  </tr>
+                <%- end -%>
+                <tr>
+                  <td><strong>Total</strong></td>
+                  <td><strong><%= number_to_currency i.total -%></strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="panel-footer">
+            <div class="btn-group">
+              <%= link_to "View Invoice", project_project_invoice_path(@project, i), class: "btn btn-default" -%>
+              <%= link_to "Edit Invoice", edit_project_project_invoice_path(@project, i), class: "btn btn-default" -%>
+              <button type="button" class="btn btn-default" data-toggle="modal" data-target="#invoice-delete-modal-<%= i.id -%>">Delete Invoice</button>
+            </div>
+          </div>
+        </div>
+        <%= render partial: "delete_modal", locals: {i: i} -%>
+      </div>
+    <%- end -%>
+  </div>
+  <%= link_to "New Invoice", new_project_project_invoice_path(@project), class: "btn btn-primary" -%>
+</div>

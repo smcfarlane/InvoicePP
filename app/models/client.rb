@@ -1,7 +1,7 @@
 class Client < ActiveRecord::Base
   has_many :projects
   has_many :client_invoices
-  belongs_to :managers
+  belongs_to :manager
   belongs_to :detail
 
   validates :active, presence: true

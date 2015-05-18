@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150515153650) do
+ActiveRecord::Schema.define(version: 20150518191233) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,11 +20,14 @@ ActiveRecord::Schema.define(version: 20150515153650) do
     t.integer  "client_id"
     t.integer  "project_id"
     t.integer  "user_id"
-    t.integer  "total"
+    t.decimal  "total",      precision: 10, scale: 2
     t.boolean  "flat_fee"
     t.boolean  "paid"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.date     "due_date"
+    t.string   "identifier"
+    t.boolean  "active"
   end
 
   create_table "clients", force: :cascade do |t|
@@ -53,10 +56,15 @@ ActiveRecord::Schema.define(version: 20150515153650) do
 
   create_table "line_items", force: :cascade do |t|
     t.string   "item"
-    t.integer  "value"
-    t.integer  "client_invoices_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.decimal  "value",             precision: 10, scale: 2
+    t.integer  "client_invoice_id"
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+  end
+
+  create_table "manager_invoices", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "managers", force: :cascade do |t|
@@ -69,6 +77,11 @@ ActiveRecord::Schema.define(version: 20150515153650) do
   create_table "portfolios", id: false, force: :cascade do |t|
     t.integer  "project_id", null: false
     t.integer  "vendor_id",  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "project_invoices", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -112,20 +125,20 @@ ActiveRecord::Schema.define(version: 20150515153650) do
   create_table "vendor_invoices", force: :cascade do |t|
     t.integer  "vendor_id"
     t.integer  "project_id"
-    t.integer  "total"
+    t.decimal  "total",      precision: 10, scale: 2
     t.boolean  "flat_fee"
     t.boolean  "entered"
     t.boolean  "paid"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
   end
 
   create_table "vendor_line_items", force: :cascade do |t|
     t.string   "item"
-    t.integer  "value"
+    t.decimal  "value",              precision: 10, scale: 2
     t.integer  "vendor_invoices_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
   end
 
   create_table "vendors", force: :cascade do |t|

@@ -1,0 +1,56 @@
+<div class="container">
+  <%- @manager.clients.each do |c| -%>
+    <%- if c.projects.count > 0 -%>
+    <div class="row">
+      <div class="col-md-10">
+        <div class="col-md-12">
+          <h3 style="display: inline-block; margin-top: 0;"><%= c.detail.name -%></h3>
+          <div class="btn-group pull-right">
+            <%= link_to "Client Invoices", client_client_invoices_path(c), class: "btn btn-default btn-sm" -%>
+          </div>
+        </div>
+        <%- c.projects.each do |p| -%>
+        <div class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4><%= p.name -%></h4>
+              <p><%= p.identifier -%></p>
+            </div>
+            <div class="panel-body">
+              <table class="table">
+                <thead>
+                <tr>
+                  <th>id</th>
+                  <th>Due Date</th>
+                  <th>Total</th>
+                  <th>Paid</th>
+                </tr>
+                </thead>
+                <tbody>
+                <%- p.client_invoices.where(active: true).each do |i| -%>
+                  <tr>
+                    <td><%= i.identifier -%></td>
+                    <td><%= i.due_date.strftime("%b %-d, %Y") -%></td>
+                    <td><%= i.total -%></td>
+                    <td><%= i.paid ? "Yes" : "No" -%></td>
+                  </tr>
+                <%- end -%>
+                </tbody>
+              </table>
+            </div>
+            <div class="panel-footer">
+              <div class="btn-group">
+                <%= link_to "Project Invoices", project_project_invoices_path(p), class: "btn btn-default btn-sm" -%>
+              </div>
+            </div>
+          </div>
+        </div>
+        <%- end -%>
+
+      </div>
+    </div>
+    <hr class="col-md-10"/>
+  <%- end -%>
+  <%- end -%>
+  <%= link_to "Create Invoice", invoices_new_path, class: "btn btn-primary" -%>
+</div>

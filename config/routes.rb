@@ -1,7 +1,19 @@
 Rails.application.routes.draw do
+
+  get 'invoices/' => 'project_invoices#index_all', as: :invoices
+  get 'invoices/new/' => 'project_invoices#new_with_project', as: :invoices_new
+  post 'invoices/' => 'project_invoices#create_with_project'
+  get 'mark_paid/:id' => 'project_invoices#mark_paid', as: :mark_paid
+
   resources :vendors
+
   resources :clients do
+    resources :client_invoices
     resources :projects
+  end
+
+  resources :projects do
+    resources :project_invoices, execpt: [:create]
   end
   post 'add_vendor_to_project/:id' => 'vendors#add_vendor_to_project', as: :vendor_to_project
   get 'all_projects/' => 'projects#index_all', as: :all_projects

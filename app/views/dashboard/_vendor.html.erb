@@ -1,14 +1,24 @@
  <div class="container">
   <div class="row">
-    <h3>Vendor Items</h3>
-    <% u.projects.each do |p| %>
-      <div class="col-md-4">
-        <h4><%= p.name %></h4>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3>Vendor Items</h3>
+      </div>
+      <div class="panel-body">
+        <% u.projects.each do |p| %>
+          <div class="col-md-4">
+            <h4><%= p.name %> - <%= p.identifier -%></h4>
+          </div>
+        <% end %>
+      </div>
+      <div class="panel-footer">
         <div class="btn-group">
-          <a href="#" class="btn btn-primary">Add Invoice</a>
-          <a href="#" class="btn btn-primary">View Invoices</a>
+          <a href="#" class="btn btn-default">Add Invoice</a>
+          <a href="#" class="btn btn-default">View Invoices</a>
         </div>
       </div>
-    <% end %>
+    </div>
+
+
   </div>
 </div>

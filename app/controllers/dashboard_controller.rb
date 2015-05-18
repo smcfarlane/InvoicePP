@@ -6,4 +6,8 @@ class DashboardController < ApplicationController
     @title = 'Dashboard'
     @u = user_type(current_user)
   end
+
+  def profile
+
+  end
 end

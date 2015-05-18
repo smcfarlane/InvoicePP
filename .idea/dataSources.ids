@@ -1579,6 +1579,8 @@
       <column name="paid" sqlType="bool" precision="1" scale="0" nullable="true" jdbcType="-7"/>
       <column name="created_at" sqlType="timestamp" precision="29" scale="6" nullable="false" jdbcType="93"/>
       <column name="updated_at" sqlType="timestamp" precision="29" scale="6" nullable="false" jdbcType="93"/>
+      <column name="due_date" sqlType="date" precision="13" scale="0" nullable="true" jdbcType="91"/>
+      <column name="identifier" sqlType="varchar" precision="2147483647" scale="0" nullable="true" jdbcType="12"/>
       <primary-key name="client_invoices_pkey" columns="id"/>
     </table>
     <table name="client_invoices_id_seq" schema="public" catalog="invoice_dev" type="SEQUENCE">
@@ -1646,8 +1648,8 @@
     <table name="line_items" schema="public" catalog="invoice_dev" type="TABLE">
       <column name="id" sqlType="serial" precision="10" scale="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnbGluZV9pdGVtc19pZF9zZXEnOjpyZWdjbGFzcyk=" autoIncrement="true"/>
       <column name="item" sqlType="varchar" precision="2147483647" scale="0" nullable="true" jdbcType="12"/>
-      <column name="value" sqlType="int4" precision="10" scale="0" nullable="true" jdbcType="4"/>
-      <column name="client_invoices_id" sqlType="int4" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="value" sqlType="numeric" precision="10" scale="2" nullable="true" jdbcType="2"/>
+      <column name="client_invoice_id" sqlType="int4" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <column name="created_at" sqlType="timestamp" precision="29" scale="6" nullable="false" jdbcType="93"/>
       <column name="updated_at" sqlType="timestamp" precision="29" scale="6" nullable="false" jdbcType="93"/>
       <primary-key name="line_items_pkey" columns="id"/>
