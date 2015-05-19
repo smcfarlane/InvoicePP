@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    .container {
+      width: 100%;
+    }
+    header {
+
+    }
+    header .info {
+      width: 80%;
+    }
+    header .dates {
+      width: 20%;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <div class="info">
+      <h2><%= @manager.detail.name -%></h2>
+      <p><strong>Address:</strong> <br/><%= @manager.detail.street_address -%> <br/> <%= @manager.detail.city -%>, <%= @manager.detail.state -%> <%= @manager.detail.zip -%>
+        <br/> <strong>Phone:</strong> <%= @manager.detail.phone_number -%> <br/><strong>Email:</strong> <%= @manager.detail.email -%></p>
+    </div>
+    <div class="dates">
+      <p><strong>Date: <%= Time.now.strftime("%b %-d, %Y") -%> <br/>Invoice: <%= @invoice.identifier -%> <br/> Due Date: <%= @invoice.due_date.strftime("%b %-d, %Y")  -%></strong> </p>
+    </div>
+    <hr/>
+  </header>
+  <div class="content">
+    <div class="">
+      <table class="">
+        <thead>
+        <tr>
+          <th>Item</th>
+          <th>Amount</th>
+        </tr>
+        </thead>
+        <tbody>
+        <%- @invoice.line_items.each_with_index do |li, i| -%>
+          <tr <%- if i % 2 == 0 -%>style="background: #ccc"<%- end -%>>
+            <td><%= li.item -%></td>
+            <td style="width: 10%;"><%= number_to_currency(li.value) -%></td>
+          </tr>
+        <%- end -%>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <hr/>
+  </div>
+  <footer>
+    <div class="col-md-offset-10 col-md-2">
+      <p><strong>Total: <%= number_to_currency(@invoice.total) -%></strong></p>
+    </div>
+  </footer>
+</div>
+</body>
+</html>

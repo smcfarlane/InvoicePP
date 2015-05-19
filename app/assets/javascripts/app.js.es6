@@ -59,18 +59,6 @@ class Form {
     $(this.form).validate({
       submitHandler: function(form) {
         $(form).submit()
-        //$.ajax({
-        //  method: method,
-        //  url: action,
-        //  data: $(form).serialize(),
-        //  datatype: "json"
-        //}).done(function (data) {
-        //  location.assign(data.location);
-        //}).fail(function(data) {
-        //  console.log(data)
-        //}).always(function(){
-        //  console.log("ajax happens :)")
-        //});
       }
     })
   }

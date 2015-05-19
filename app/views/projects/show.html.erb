@@ -29,7 +29,7 @@
           <ul class="list-group">
             <%- @project.client_invoices.each do |i| -%>
               <li class="list-group-item">
-                <p>Invoice: <%= i.id -%></p>
+                <p>Invoice: <%= i.identifier -%></p>
                 <p>Total: <%= i.total -%></p>
                 <p>Paid: <%= i.paid ? "Yes" : "No" -%></p>
               </li>
@@ -37,7 +37,9 @@
           </ul>
         </div>
         <div class="panel-footer">
-
+          <div class="btn-group">
+            <%= link_to "Invoices", project_project_invoices_path(@project), class: "btn btn-default" -%>
+          </div>
         </div>
       </div>
     </div>

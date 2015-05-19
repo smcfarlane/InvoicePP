@@ -5,5 +5,4 @@ $(document).ready(function(){
   } else if ($(".update-project-form").length > 0) {
     var update_project = new Form($(".update-project-form"), $(".update-project-form").attr("action"), "PUT")
   }
-  console.log(new_project);
 });

@@ -14,7 +14,7 @@
 </fieldset>
 <fieldset class="line-items">
   <legend>Invoice Details <span class="pull-right"><button type="button" class="btn btn-info btn-xs new-line-item">New Line Item</button></span></legend>
-  <input class="num_of_line_items" type="hidden" name="num_of_line_items" value="<%= @invoice.line_items.count -%>"/>
+  <input class="num_of_line_items" type="hidden" name="num_of_line_items" value="<%= @invoice.line_items.count + 1 -%>"/>
   <%- @invoice.line_items.each_with_index do |li, i| -%>
     <div class="row">
       <input type="hidden" name="item<%= i + 1 -%>-id" value="<%= li.id -%>"/>
@@ -22,14 +22,33 @@
         <label for="item<%= i + 1 -%>">Line Item <%= i + 1 -%></label>
         <input type="text" id="item<%= i + 1 -%>" name="item<%= i + 1 -%>" class="form-control" value="<%= li.item -%>"/>
       </div>
-      <div class="form-group col-md-4">
-        <Label>Line Item <%= i + 1 -%> Amount</Label>
+      <div class="form-group col-md-3">
+        <Label for="amount<%= i + 1 -%>">Line Item <%= i + 1 -%> Amount</Label>
         <div class="input-group">
           <span class="input-group-addon">$</span>
-          <input name="amount<%= i + 1 -%>" type="text" class="form-control" aria-label="Amount" value="<%= li.value -%>">
+          <input id="amount<%= i + 1 -%>" name="amount<%= i + 1 -%>" type="number" class="form-control" aria-label="Amount" value="<%= li.value -%>">
         </div>
+      </div>
+      <div class="col-md-1">
+        <span id="remove-li" class="glyphicon glyphicon-remove top-30" aria-hidden="true"></span>
       </div>
     </div>
   <%- end -%>
+  <div class="row">
+    <div class="col-md-8 form-group">
+      <label for="item<%= @invoice.line_items.count + 1 -%>">Line Item <%= @invoice.line_items.count + 1 -%></label>
+      <input type="text" id="item<%= @invoice.line_items.count + 1 -%>" name="item<%= @invoice.line_items.count + 1 -%>" class="form-control" />
+    </div>
+    <div class="form-group col-md-3">
+      <Label for="amount<%= @invoice.line_items.count + 1 -%>">Line Item <%= @invoice.line_items.count + 1 -%> Amount</Label>
+      <div class="input-group">
+        <span class="input-group-addon">$</span>
+        <input id="amount<%= @invoice.line_items.count + 1 -%>" name="amount<%= @invoice.line_items.count + 1 -%>" type="number" class="form-control" aria-label="Amount">
+      </div>
+    </div>
+    <div class="col-md-1">
+      <span id="remove-li" class="glyphicon glyphicon-remove top-30" aria-hidden="true"></span>
+    </div>
+  </div>
 </fieldset>
 <button type="submit" class="btn btn-primary">Update Invoice</button>

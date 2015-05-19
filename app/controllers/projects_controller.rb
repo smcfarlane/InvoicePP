@@ -35,11 +35,11 @@ class ProjectsController < ApplicationController
             name: params[:name],
             identifier: params[:identifier],
             details: params[:details],
-            client_id: params[:client_id]
+            client_id: params[:client_id],
+            active: true
     )
     @project.save
-    @return = {location: client_project_path(@client, @project) }
-    render json: @return
+    redirect_to client_project_path(@client, @project)
   end
 
   def edit
@@ -58,8 +58,7 @@ class ProjectsController < ApplicationController
     @project.identifier = params[:identifier]
     @project.details = params[:details]
     @project.save
-    @return = {location: client_project_path(@client, @project) }
-    render json: @return
+    redirect_to client_project_path(@client, @project)
   end
 
   def destroy

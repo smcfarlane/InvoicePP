@@ -17,7 +17,7 @@
   <div class="col-md-6 form-group">
     <label for="identifier">Invoice Identifier</label>
     <small>Invoice Name or Number according to your system.</small>
-    <input type="text" id="identifier" name="identifier" class="form-control"/>
+    <input type="text" id="identifier" name="identifier" class="form-control" required/>
   </div>
   <div class="col-md-6">
     <div class="form-group">
@@ -32,13 +32,13 @@
   <div class="row">
     <div class="col-md-8 form-group">
       <label for="item1">Line Item 1</label>
-      <input type="text" id="item1" name="item1" class="form-control"/>
+      <input type="text" id="item1" name="item1" class="form-control" required/>
     </div>
     <div class="form-group col-md-4">
-      <Label>Line Item 1 Amount</Label>
+      <Label for="amount1">Line Item 1 Amount</Label>
       <div class="input-group">
         <span class="input-group-addon">$</span>
-        <input name="amount1" type="text" class="form-control" aria-label="Amount">
+        <input id="amount1" name="amount1" type="number" class="form-control" aria-label="Amount" required>
       </div>
     </div>
   </div>

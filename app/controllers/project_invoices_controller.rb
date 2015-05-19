@@ -9,6 +9,11 @@ class ProjectInvoicesController < ApplicationController
     @manager = Manager.find_by_user_id(current_user.id)
   end
 
+  def index_client
+    @client = Client.find(params[:client_id])
+    @title = "Invoices for #{@client.detail.name}"
+  end
+
   def new_with_project
     @title = "Create a New Invoice"
     @manager = Manager.find_by_user_id(current_user.id)
@@ -24,14 +29,16 @@ class ProjectInvoicesController < ApplicationController
               active: true
     )
     total = 0
-    (params[:num_of_line_items].to_i + 1).times do |n|
+    (params[:num_of_line_items].to_i).times do |n|
       if n != 0
-        LineItem.create!(
-            item: params["item#{n}"],
-            value: params["amount#{n}"].to_i,
-            client_invoice_id: @invoice.id
-        )
-        total += params["amount#{n}"].to_i
+        if params["item#{n}"] != "" && params["amount#{n}"] != ""
+          LineItem.create!(
+              item: params["item#{n}"],
+              value: params["amount#{n}"].to_i,
+              client_invoice_id: @invoice.id
+          )
+          total += params["amount#{n}"].to_i
+        end
       end
     end
     @invoice.total = total
@@ -55,6 +62,13 @@ class ProjectInvoicesController < ApplicationController
     @invoice = ClientInvoice.find(params[:id])
     @manager = Manager.find_by_user_id(current_user.id)
     @title = "Invoice: #{@invoice.identifier}"
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "invoice-#{@invoice.identifier}", template: "project_invoices/pdf",
+               save_to_file: Rails.root.join('pdfs', "#{@invoice.id}.pdf"), wkhtmltopdf: '/usr/local/bin/wkhtmltopdf'
+      end
+    end
   end
 
   def new
@@ -76,19 +90,26 @@ class ProjectInvoicesController < ApplicationController
         due_date: Time.new(params[:due_date][:year], params[:due_date][:month], params[:due_date][:day])
     )
     total = 0
-    (params[:num_of_line_items].to_i + 1).times do |n|
+    (params[:num_of_line_items].to_i).times do |n|
       if n != 0
-        if params["item#{n}-id"]
-          LineItem.update(params["item#{n}-id"].to_i,
-              item: params["item#{n}"],
-              value: params["amount#{n}"].to_i)
+        if (params["item#{n}"] != "" && params["amount#{n}"] != "")
+          if params["item#{n}-id"]
+            LineItem.update(params["item#{n}-id"].to_i,
+                item: params["item#{n}"],
+                value: params["amount#{n}"].to_i)
+          else
+            LineItem.create!(
+                item: params["item#{n}"],
+                value: params["amount#{n}"].to_i,
+                client_invoice_id: @invoice.id)
+          end
+          total += params["amount#{n}"].to_i
         else
-          LineItem.create!(
-              item: params["item#{n}"],
-              value: params["amount#{n}"].to_i,
-              client_invoice_id: @invoice.id)
+          if (params["item#{n}-id"] != "" || params["item#{n}-id"] != nil)
+            @li = LineItem.find(params["item#{n}-id"])
+            @li.delete
+          end
         end
-        total += params["amount#{n}"].to_i
       end
     end
     @invoice.total = total

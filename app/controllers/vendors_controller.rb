@@ -37,7 +37,8 @@ class VendorsController < ApplicationController
     @detail.save!
     @vendor = Vendor.create(
             detail_id: @detail.id,
-            created_by: @manager.id
+            created_by: @manager.id,
+            active: true
     )
     @vendor.save!
     redirect_to vendor_path(@vendor)

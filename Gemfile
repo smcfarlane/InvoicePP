@@ -38,6 +38,10 @@ gem 'pundit'
 # Markdown
 gem 'redcarpet'
 
+# PDF Functionality
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
+
 group :production do
   # Use Unicorn as the app server
   gem 'unicorn'

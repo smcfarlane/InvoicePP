@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="row">
+    <%- @client.projects.each do |p| -%>
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <div class="row">
+              <h3 class="col-md-8"><%= p.name.titleize -%> <small><%= p.identifier -%></small></h3>
+              <div class="btn-group col-md-4">
+                <%= link_to "Details", project_path(p), class: "btn btn-default" -%>
+                <%= link_to "Invoices", project_project_invoices_path(p), class: "btn btn-default" -%>
+              </div>
+            </div>
+          </div>
+          <div class="panel-body">
+            <%- p.client_invoices.where(active: true).each do |i| -%>
+              <div class="col-md-4">
+                <div class="panel panel-default">
+                  <div class="panel-heading"><h4>Invoice Id: <%= i.identifier -%></h4></div>
+                  <div class="panel-body">
+                    <ul class="list-group">
+                      <li class="list-group-item">Due Date: <span class="pull-right"><%= i.due_date.strftime("%b %-d, %Y") -%></span></li>
+                      <li class="list-group-item">Paid <span class="pull-right"><%= i.paid ? "Yes" : "No"  -%></span></li>
+                    </ul>
+                    <table class="table">
+                      <thead>
+                      <tr>
+                        <th>Item</th>
+                        <th>Amount</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <%- i.line_items.each do |li| -%>
+                        <tr>
+                          <td><%= li.item -%></td>
+                          <td><%= number_to_currency(li.value) -%></td>
+                        </tr>
+                      <%- end -%>
+                      <tr>
+                        <td><strong>Total</strong></td>
+                        <td><strong><%= number_to_currency i.total -%></strong></td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            <%- end -%>
+          </div>
+        </div>
+      </div>
+    <%- end -%>
+  </div>
+</div>

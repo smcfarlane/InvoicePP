@@ -4,11 +4,11 @@ Rails.application.routes.draw do
   get 'invoices/new/' => 'project_invoices#new_with_project', as: :invoices_new
   post 'invoices/' => 'project_invoices#create_with_project'
   get 'mark_paid/:id' => 'project_invoices#mark_paid', as: :mark_paid
+  get 'client/:client_id/invoices/' => 'project_invoices#index_client', as: :client_invoices
 
   resources :vendors
 
   resources :clients do
-    resources :client_invoices
     resources :projects
   end
 

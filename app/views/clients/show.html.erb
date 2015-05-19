@@ -36,8 +36,8 @@
           <tbody>
             <%- @client.projects.each do |p| -%>
               <tr>
-                <td>p.name</td>
-                <td>p.identifier</td>
+                <td><%= p.name -%></td>
+                <td><%= p.identifier -%></td>
               </tr>
             <%- end -%>
           </tbody>
@@ -56,12 +56,12 @@
       <div class="panel-heading"><h3>Invoices</h3></div>
       <div class="panel-body">
         <ul class="list-group">
-          <li class="list-group-item">Current Invoices: <span class="badge"><%= @client.client_invoices.count %></span></li>
-          <li class="list-group-item">Current Invoices Total: <span class="pull-right"><%= @client.client_invoices.where(paid: false).pluck(:total).inject(0, :+) %></span></li>
+          <li class="list-group-item">Current Invoices: <span class="badge"><%= @client.client_invoices.where(active: true).count %></span></li>
+          <li class="list-group-item">Current Unpaid Invoices Total: <span class="pull-right"><%= @client.client_invoices.where(paid: false).pluck(:total).inject(0, :+) %></span></li>
         </ul>
       </div>
       <div class="panel-footer">
-        <a href="#" class="btn btn-default">View Invoices</a>
+        <%= link_to "View Invoices", client_invoices_path(@client), class: "btn btn-default" -%>
       </div>
     </div>
   </div>

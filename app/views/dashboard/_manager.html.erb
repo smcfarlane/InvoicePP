@@ -2,16 +2,23 @@
   <div class="row panel panel-default">
     <div class="panel-heading"><h3>Manager Items</h3></div>
     <div class="panel-body">
-      <% u.clients.all.each do |c| %>
+      <div class="row">
+      <% u.clients.all.each_with_index do |c, i| %>
         <div class="col-md-4">
-          <h4><%=	 c.detail.name %></h4>
-          <ul>
+          <ul class="list-group">
+            <li class="list-group-item active">
+              <h4 class="list-group-item-heading"><%=	 c.detail.name %></h4>
+            </li>
             <%	 c.projects.all.each do |p| %>
-              <li><%=	p.name %> - <%= p.identifier %></li>
+              <li class="list-group-item"><strong><%=	p.name.capitalize %> </strong>- <%= p.identifier %> <br/> <%= link_to "Details", project_path(p) -%> - <%= link_to "Invoices", project_project_invoices_path(p) -%></li>
             <%	 end %>
           </ul>
         </div>
+        <%- if (i + 1) % 3 == 0 && i  -%>
+          </div><div class="row">
+        <%- end -%>
       <% end %>
+      </div>
     </div>
     <div class="panel-footer">
       <div class="btn-group">
